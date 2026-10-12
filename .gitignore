@@ -1,0 +1,42 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+ENV/
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Editor & IDE directories
+.idea/
+*.swp
+*.swo
+*~
+
+# Generated export artifacts (keep source markdown in wiki/ and raw/)
+wiki/**/exports/*.html
+raw/archive/*
+!raw/archive/.gitkeep
+raw/assets/*
+!raw/assets/.gitkeep
