@@ -1,6 +1,6 @@
 # AI Wiki Template — Living Knowledge Engine for Human + AI Collaboration
 
-[![Wiki Integrity Lint](https://github.com/metiosoftware/ai-wiki-template/actions/workflows/wiki-lint.yml/badge.svg)](https://github.com/metiosoftware/ai-wiki-template/actions)
+[![Wiki Integrity Lint](https://github.com/metiosoftware/ai_wiki_template/actions/workflows/wiki-lint.yml/badge.svg?branch=master)](https://github.com/metiosoftware/ai_wiki_template/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
@@ -121,7 +121,7 @@ The template includes turnkey agent skills located in `.claude/skills/` and mapp
 ### 1. Clone & Use as Template
 Click **"Use this template"** on GitHub or clone locally:
 ```bash
-git clone https://github.com/metiosoftware/ai-wiki-template.git my-project-wiki
+git clone https://github.com/metiosoftware/ai_wiki_template.git my-project-wiki
 cd my-project-wiki
 ```
 
