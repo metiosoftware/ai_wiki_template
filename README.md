@@ -53,7 +53,7 @@ This template turns that concept into an operational engine with **Trust Factors
 │  wiki/glossary/         Canonical terminology          │
 └─────────────────────────┬──────────────────────────────┘
                           │
-                          ▼ (wiki-query, wiki-lint, wiki-export)
+                          ▼ (wiki-query, wiki-lint)
 ┌────────────────────────────────────────────────────────┐
 │                    EXECUTION LAYER                     │
 │  AGENTS.md      Operating manual & authority rules     │
@@ -83,8 +83,7 @@ This template turns that concept into an operational engine with **Trust Factors
 │   ├── wiki-query/            ← Role-aware answers with exact citations
 │   ├── wiki-lint/             ← Health-check wiki links, categories & frontmatter
 │   ├── wiki-get/              ← Fetch web sources into raw/
-│   ├── doc-reader/            ← Extract CSV / TXT / DOCX / XLSX / PDF → Markdown
-│   └── wiki-export/           ← Convert drafts to rich text (1-click copy)
+│   └── doc-reader/            ← Extract CSV / TXT / DOCX / XLSX / PDF → Markdown
 ├── .github/workflows/         ← CI/CD automation
 │   └── wiki-lint.yml          ← Automated linting on push & PR
 ├── raw/                       ← Immutable source documents
@@ -114,7 +113,6 @@ The template includes turnkey agent skills located in `.claude/skills/` and mapp
 | **`wiki-query`** | Prompt `/wiki-query` | Synthesizes role-aware answers citing exact file paths and line ranges. Respects ADR authority. |
 | **`wiki-get`** | `python .claude/skills/wiki-get/scripts/fetch_url.py <URL> raw/` | Downloads web articles or docs into clean Markdown snapshots in `raw/`. |
 | **`doc-reader`** | `python .claude/skills/doc-reader/scripts/convert_doc.py <file>` | Converts CSV tables, text logs, or DOCX/XLSX/PDFs into Markdown for ingestion. |
-| **`wiki-export`** | `python .claude/skills/wiki-export/scripts/export_doc.py <file> --open` | Generates an interactive HTML preview with **1-click rich-text copying** for Google Docs, Notion, Confluence, or LinkedIn. |
 
 ---
 
@@ -143,17 +141,10 @@ python3 .claude/skills/wiki-lint/scripts/wiki-lint.py wiki/
    > *"Ingest raw/project-brief.txt into the wiki following our schema."*
 3. The agent compiles structured pages into `wiki/`, updates `wiki/index.md`, appends to `wiki/log.md`, and archives the file into `raw/archive/`.
 
-### 4. Query the Knowledge Base
+### 4. Query the Knowledge Base (Role-Aware)
 Ask your agent:
    > *"Based on our wiki, what persistence layer did we choose and what are its invariants?"*
-The agent uses `wiki-query` to return exact citations from [wiki/decisions/ADR-001-record-architecture-decisions.md](file:///wiki/decisions/ADR-001-record-architecture-decisions.md) and [wiki/architecture/system-overview.md](file:///wiki/architecture/system-overview.md).
-
-### 5. Export to Google Docs / Notion / Confluence
-When you need to share a decision or spec externally:
-```bash
-python .claude/skills/wiki-export/scripts/export_doc.py wiki/architecture/system-overview.md --open
-```
-Click **"📋 Copy Rich Text"** in the browser toolbar and press `Ctrl+V` into your target editor. Headings, lists, code styling, and tables are preserved natively.
+The agent uses `wiki-query`, identifies or asks for your role (Developer, Architect, PM, Stakeholder), and returns tailored answers citing exact line numbers from [wiki/decisions/ADR-001-record-architecture-decisions.md](file:///wiki/decisions/ADR-001-record-architecture-decisions.md) and [wiki/architecture/system-overview.md](file:///wiki/architecture/system-overview.md).
 
 ---
 

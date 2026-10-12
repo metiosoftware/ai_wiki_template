@@ -6,7 +6,10 @@ The AI agent (Claude Code, Antigravity, Cursor, Codex, Pi) compiles them into st
 
 This document is the **operating manual and schema definition**. It is read automatically by all agents working in this repository:
 - **Claude Code**: reads via `CLAUDE.md` (`@AGENTS.md` import)
-- **Antigravity / Pi / Cursor**: reads directly via `AGENTS.md`
+- **Cursor**: reads via `AGENTS.md` and `.cursorrules`
+- **Antigravity / Gemini**: reads via `GEMINI.md`, `.agents/`, and `AGENTS.md`
+- **OpenAI / Codex / Copilot**: reads via `.github/copilot-instructions.md` and `AGENTS.md`
+- **Qwen & Open Models (Aider, Windsurf, Cline)**: reads via `AGENTS.md` natively
 
 ---
 
@@ -33,8 +36,7 @@ This document is the **operating manual and schema definition**. It is read auto
 │   ├── wiki-query/            ← Role-aware answers with exact citations
 │   ├── wiki-lint/             ← Health-check wiki links, categories & frontmatter
 │   ├── wiki-get/              ← Fetch web sources into raw/
-│   ├── doc-reader/            ← Extract CSV / TXT / DOCX / XLSX / PDF → Markdown
-│   └── wiki-export/           ← Convert drafts to rich text (1-click copy)
+│   └── doc-reader/            ← Extract CSV / TXT / DOCX / XLSX / PDF → Markdown
 ├── .github/workflows/         ← CI/CD automation
 │   └── wiki-lint.yml          ← Automated linting on push & PR
 ├── raw/                       ← Immutable source documents
@@ -123,7 +125,7 @@ When synthesizing answers, drafting code, or making technical decisions, agents 
 
 ## Role-Aware Context Synthesis
 
-When answering questions or generating specifications via `wiki-query`, agents must adapt their depth, terminology, and structure according to the user's role:
+When answering questions or generating specifications via `wiki-query`, agents must determine the inquirer's role before or during synthesis. If the role is unstated or ambiguous, briefly prompt the user to confirm their lens (or frame the answer through the primary technical lens while offering others):
 
 - **Architect**: Emphasize systemic invariants, modular decoupling, trade-offs, failure modes, data lifecycle, and ADR justification.
 - **Developer / Engineer**: Emphasize concrete interfaces, data types, error handling, reproduction steps, code snippets, and setup commands.
@@ -172,9 +174,10 @@ To ensure documentation remains natural, engaging, and professional for human re
 7. Run `wiki-lint` to confirm zero broken links or orphan pages.
 
 ### 2. Synthesize Answers (`wiki-query`)
-1. Consult `wiki/index.md` and `wiki/overview.md`.
-2. Gather relevant pages, weighting by Trust Factor (`status: approved` > `status: draft`).
-3. Formulate an answer tailored to the user's role with exact citations (`path/to/page.md#L10-L20`).
+1. Ascertain the user's role (Architect, Developer, Product Manager, Stakeholder). Ask or confirm if not evident.
+2. Consult `wiki/index.md` and `wiki/overview.md`.
+3. Gather relevant pages, weighting by Trust Factor (`status: approved` > `status: draft`).
+4. Formulate an answer tailored to the user's role with exact citations (`path/to/page.md#L10-L20`).
 
 ### 3. Fetch Web Knowledge (`wiki-get`)
 ```bash
@@ -187,12 +190,6 @@ Captures clean markdown snapshots with provenance headers into `raw/` ready for 
 python .claude/skills/wiki-lint/scripts/wiki-lint.py wiki/
 ```
 Validates frontmatter, category alignment, internal links, and index completeness.
-
-### 5. Export to Rich Text (`wiki-export`)
-```bash
-python .claude/skills/wiki-export/scripts/export_doc.py wiki/<file>.md --open
-```
-Generates an interactive HTML preview with 1-click clipboard copy for Google Docs, Confluence, Notion, LinkedIn Articles, or email.
 
 ---
 

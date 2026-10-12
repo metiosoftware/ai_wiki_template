@@ -43,7 +43,7 @@ This repository organizes information into three distinct layers, separating imm
 │  wiki/glossary/         Canonical terminology          │
 └─────────────────────────┬──────────────────────────────┘
                           │
-                          ▼ (wiki-query, wiki-lint, wiki-export)
+                          ▼ (wiki-query, wiki-lint)
 ┌────────────────────────────────────────────────────────┐
 │                    EXECUTION LAYER                     │
 │  AGENTS.md      Operating manual & authority rules     │
