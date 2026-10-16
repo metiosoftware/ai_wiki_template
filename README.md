@@ -4,6 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
+> [!NOTE]
+> **Bonus Content & Maintenance Status**: This template is bonus content accompanying this [LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515694246176264192). Please note that it is not actively updated by Metio and there won't be future updates. You are welcome to fork, adapt, and build upon it freely under the MIT License.
+
 A production-ready, 3-layer Git knowledge repository designed for pairing human teams with autonomous AI coding agents (**Claude Code**, **Antigravity**, **Cursor**, **Codex**, **Pi**).
 
 It provides an authoritative source of truth that prevents context decay, stops hallucinated architecture decisions, and maintains documentation health with automated CI/CD linting.
